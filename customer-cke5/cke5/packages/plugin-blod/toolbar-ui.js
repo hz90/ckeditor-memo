@@ -1,7 +1,8 @@
 import Plugin from "@ckeditor/ckeditor5-core/src/plugin";
 import ButtonView from "@ckeditor/ckeditor5-ui/src/button/buttonview";
 // import boldIcon from "@ckeditor/ckeditor5-basic-styles/theme/icons/bold.svg";
-import boldIcon from "@ckeditor/ckeditor5-basic-styles/theme/icons/bold.svg";
+//加载本地路径图标
+import boldIcon from "@plugin/plugin-blod/bold.svg";
 import { COMMAND_NAME__BOLD, COMMAND_LABEL__BOLD } from "./constant";
 
 export default class BoldToolbarUI extends Plugin {

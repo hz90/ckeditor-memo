@@ -20,9 +20,10 @@ module.exports = {
 
     module: {
         rules: [
-            {
-                test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
-
+            {   //这个是打包svg图标的地方，默认是找/ckeditor5/theme/icons/xxx.svg
+                //如果想要加载本地的只需改成/.svg$/,
+                // test: /ckeditor5-[^/\\]+[/\\]theme[/\\]icons[/\\][^/\\]+\.svg$/,
+                test: /.svg$/,
                 use: [ 'raw-loader' ]
             },
             {
