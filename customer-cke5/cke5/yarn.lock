@@ -204,10 +204,27 @@
   dependencies:
     ckeditor5 "^34.2.0"
 
+"@ckeditor/ckeditor5-image@^34.2.0":
+  version "34.2.0"
+  resolved "https://registry.npmmirror.com/@ckeditor/ckeditor5-image/-/ckeditor5-image-34.2.0.tgz#8a831b82f10919b2496acda13abfcd56dbfb4246"
+  integrity sha512-JY6uETyhIFjOk4kky6HrpNg8JFYVz0mU654qZ7o+a5J+L55cOIC8JDMA8VUa5Opn2XDwZb4Q91ArX1hIJSGRQA==
+  dependencies:
+    "@ckeditor/ckeditor5-ui" "^34.2.0"
+    ckeditor5 "^34.2.0"
+    lodash-es "^4.17.15"
+
 "@ckeditor/ckeditor5-inspector@^4.1.0":
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@ckeditor/ckeditor5-inspector/-/ckeditor5-inspector-4.1.0.tgz#ceb970f353ed6bd54ebf0c89a297f0f7fb4512f2"
   integrity sha512-yKoIFpaSVQQIhgFEyoltwG40OSsWX5psYdYvNxW84nfxgrs90DJrbMQDtdchVZNMXBu6CkJfPiPG0WBLU9su3g==
+
+"@ckeditor/ckeditor5-media-embed@^34.2.0":
+  version "34.2.0"
+  resolved "https://registry.npmmirror.com/@ckeditor/ckeditor5-media-embed/-/ckeditor5-media-embed-34.2.0.tgz#f3e97f4a33bff7c968554056136c79752f52a860"
+  integrity sha512-XQxTAwtZ0Fe6eph+5equH8DGtcHMj6ktJ54g/aQKyC4UxHb5JFSQ8y9Ud0IQfH12lT1uyagDOnC8rY2AUKGBGA==
+  dependencies:
+    "@ckeditor/ckeditor5-ui" "^34.2.0"
+    ckeditor5 "^34.2.0"
 
 "@ckeditor/ckeditor5-paragraph@^34.2.0":
   version "34.2.0"

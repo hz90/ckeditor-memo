@@ -12,3 +12,7 @@ https://www.nhooo.com/note/qadwps.html
 https://juejin.cn/post/7126182190429241375
 https://ckeditor.com/docs/ckeditor5/latest/installation/getting-started/quick-start-other.html
 https://www.cnblogs.com/wisewrong/p/14325817.html
+
+
+视频相关
+https://blog.csdn.net/qq_40121308/article/details/110470149
