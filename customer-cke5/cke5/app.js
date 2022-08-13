@@ -8,6 +8,9 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 // import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Bold from '@plugin/plugin-blod/main';
+
+import MyFilePlug from '@plugin/plugin-fileupload/main';
+
 //文件上传使用的插件
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 //图片相关
@@ -44,6 +47,7 @@ const pluginsConf=[
   ImageInsert,
   ImageResize,
   MediaEmbed,
+  MyFilePlug,
 ]
 //工具栏要显示的东西
 const toolbarConf=[
@@ -55,6 +59,7 @@ const toolbarConf=[
   'uploadImage',
   'cKFinder',
   'mediaEmbed',
+  MyFilePlug.pluginName,
 ]
 
 
@@ -78,7 +83,7 @@ export class MyEditor {
         //https://stackoverflow.com/questions/53168438/ckeditor-5-register-more-than-one-upload-adapter
         simpleUpload: {
           // The URL that the images are uploaded to.
-          uploadUrl: 'http://localhost:8080/upload/image',
+          uploadUrl: 'http://localhost:8080/upload/file',
   
           // Enable the XMLHttpRequest.withCredentials property.
           // withCredentials: true,
