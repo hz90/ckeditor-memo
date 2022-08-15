@@ -12,8 +12,8 @@ export default class FileToolbarUI extends Plugin {
 
   _createToolbarButton() {
     const editor = this.editor;
-    const command = editor.commands.get(COMMAND_NAME__FILE);
     editor.ui.componentFactory.add(COMMAND_NAME__FILE, (locale) => {
+      const command = editor.commands.get( COMMAND_NAME__FILE );
       const view = new FileDialogButtonView(locale);
       view.set( {
         acceptedType: '*',
@@ -26,16 +26,15 @@ export default class FileToolbarUI extends Plugin {
         // withText: true, // 在按钮上展示 label
         // class: "toolbar_button_bold",
       });
+      view.buttonView.bind( 'isEnabled' ).to( command );
+
       view.on( 'done', ( evt, files ) => {
         for ( const file of Array.from( files ) ) {
           console.log( 'Selected file', file );
-          editor.execute('ck-myuploadfile', { files: file });
+          editor.execute(COMMAND_NAME__FILE, { files: file });
         }
       });
-      // // 将按钮的状态关联到命令
-      view.bind("isOn", "isEnabled").to(command, "value", "isEnabled");
-      // // 点击按钮时触发相应命令
-      // this.listenTo(view, "execute", () => editor.execute(COMMAND_NAME__FILE));
+
       return view;
     });
   }
