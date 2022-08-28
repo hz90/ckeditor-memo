@@ -12,7 +12,7 @@ import Bold from '@plugin/plugin-blod/main';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import MyFilePlug from '@plugin/plugin-fileupload/main';
 import FileUploadProgress from '@plugin/plugin-fileupload/process/fileuploadprogress';
-import MySimpleFileUploadAdapter from '@plugin/plugin-fileupload/myuploadAdapter/mysimplefileuploadadapter';
+// import MySimpleFileUploadAdapter from '@plugin/plugin-fileupload/myuploadAdapter/mysimplefileuploadadapter';
 //---------------文件上传使用的插件
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 //图片相关
@@ -52,8 +52,8 @@ const pluginsConf=[
   MediaEmbed,
   MyFilePlug,
   FileUploadProgress,
-  MySimpleFileUploadAdapter,
-]
+  // MySimpleFileUploadAdapter,
+];
 //工具栏要显示的东西
 const toolbarConf=[
   "undo",
@@ -63,79 +63,11 @@ const toolbarConf=[
   "Italic",
   "link",
   'uploadImage',
-  'cKFinder',
   'mediaEmbed',
   MyFilePlug.pluginName,
-]
+];
 
 
-
-class MyUploadAdapter {
-  constructor( loader ) {
-      // The file loader instance to use during the upload.
-      this.loader = loader;
-  }
-
-  // Starts the upload process.
-  upload() {
-      return this.loader.file
-          .then( file => new Promise( ( resolve, reject ) => {
-              this._initRequest();
-              this._initListeners( resolve, reject, file );
-              this._sendRequest( file );
-          } ) );
-  }
-
-  // Aborts the upload process.
-  abort() {
-      if ( this.xhr ) {
-          this.xhr.abort();
-      }
-  }
-  // Initializes the XMLHttpRequest object using the URL passed to the constructor.
-  _initRequest() {
-      const xhr = this.xhr = new XMLHttpRequest();
-      xhr.open( 'POST', 'http://localhost:8080/upload/file', true );
-      xhr.responseType = 'json';
-  }
-  // Initializes XMLHttpRequest listeners.
-  _initListeners( resolve, reject, file ) {
-      const xhr = this.xhr;
-      const loader = this.loader;
-      const genericErrorText = `Couldn't upload file: ${ file.name }.`;
-      xhr.addEventListener( 'error', () => reject( genericErrorText ) );
-      xhr.addEventListener( 'abort', () => reject() );
-      xhr.addEventListener( 'load', () => {
-          const response = xhr.response;
-          if ( !response || response.error ) {
-              return reject( response && response.error ? response.error.message : genericErrorText );
-          }
-          resolve( {
-              default: response.url
-          } );
-      } );
-      if ( xhr.upload ) {
-          xhr.upload.addEventListener( 'progress', evt => {
-              if ( evt.lengthComputable ) {
-                  loader.uploadTotal = evt.total;
-                  loader.uploaded = evt.loaded;
-              }
-          } );
-      }
-  }
-  _sendRequest( file ) {
-      const data = new FormData();
-      data.append( 'upload', file );
-      this.xhr.send( data );
-  }
-}
-
-function MyCustomUploadAdapterPlugin( editor ) {
-  editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-      // Configure the URL to the upload script in your back-end here!
-      return new MyUploadAdapter( loader );
-  };
-}
 //文件上传； https://github.com/eMAGTechLabs/ckeditor5-file-upload
 
 export class MyEditor {
@@ -153,7 +85,7 @@ export class MyEditor {
     render() {
       ClassicEditor.create(document.querySelector(`#${this.id}`), {
         plugins: pluginsConf,
-        extraPlugins: [MyCustomUploadAdapterPlugin],
+        // extraPlugins: [MyCustomUploadAdapterPlugin,MySimpleFileUploadAdapter],
         toolbar: toolbarConf,
         //图片，文件，视频上传分为不同的url，需要重写UploadAdapter 
         //https://stackoverflow.com/questions/53168438/ckeditor-5-register-more-than-one-upload-adapter
@@ -170,21 +102,21 @@ export class MyEditor {
           // 	Authorization: 'Bearer <JSON Web Token>'
           // }
         },
-  mySimpleFileUpload: {
-    url: 'http://localhost:8080/upload/file',
-	// withCredentials: true,
-	// headers: {
-	// 	'X-CSRF-TOKEN': 'CSRF_TOKEN',
-	// 	Authorization: 'Bearer <JSON Web Token>',
-	// },
-    fileTypes: [
-      '.pdf',
-      '.doc',
-      '.docx',
-      '.xls',
-      '.xlsx'
-    ]
-  },
+        mySimpleFileUpload: {
+          url: 'http://localhost:8080/upload/file',
+        // withCredentials: true,
+        // headers: {
+        // 	'X-CSRF-TOKEN': 'CSRF_TOKEN',
+        // 	Authorization: 'Bearer <JSON Web Token>',
+        // },
+          fileTypes: [
+            '.pdf',
+            '.doc',
+            '.docx',
+            '.xls',
+            '.xlsx'
+          ]
+        },
         image: imageConf,
        initialData: this.content,
         // 'imageConfig' --> IMAGE_CONFIG
