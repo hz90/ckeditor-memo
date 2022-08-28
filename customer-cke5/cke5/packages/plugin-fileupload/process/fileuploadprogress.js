@@ -83,6 +83,10 @@ function _showProgressBar(editor, loader) {
 	} );
 
 	loader.on( 'change:uploadedPercent', ( evt, name, value ) => {
+		const elemens=progressBar.element.children;
+		if(progressBar.element?.children[0]){
+			progressBar.element.children[0].innerHTML="上传中..."+(Math.round(value*100)/100)+"%";
+		}
 		progressBar.set('customWidth', value);
 	} );
 
@@ -99,4 +103,5 @@ function _removeProgressBar(toolbar, progressBar) {
 	toolbar.element.removeChild(progressBar.element);
 	progressBar.destroy();
 }
+
 
