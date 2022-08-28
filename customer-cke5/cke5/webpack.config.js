@@ -27,8 +27,8 @@ module.exports = {
                 use: [ 'raw-loader' ]
             },
             {
-                test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
-
+               // test: /ckeditor5-[^/\\]+[/\\]theme[/\\].+\.css$/,
+               test: /.css$/,
                 use: [
                     {
                         loader: 'style-loader',

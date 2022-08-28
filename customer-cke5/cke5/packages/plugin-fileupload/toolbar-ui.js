@@ -15,8 +15,9 @@ export default class FileToolbarUI extends Plugin {
     editor.ui.componentFactory.add(COMMAND_NAME__FILE, (locale) => {
       const command = editor.commands.get( COMMAND_NAME__FILE );
       const view = new FileDialogButtonView(locale);
+      const fileTypes = editor.config.get( 'mySimpleFileUpload.fileTypes' );
       view.set( {
-        acceptedType: '*',
+        acceptedType: fileTypes.map(type => `${ type }`).join(','),
         allowMultipleFiles: false
       } );
       view.buttonView.set({

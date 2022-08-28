@@ -20,8 +20,8 @@ export default class FileEditing extends Plugin {
     const conversion = editor.conversion;
     const fileRepository = editor.plugins.get(FileRepository);
 
-
     // Setup schema to allow uploadId and uploadStatus for files.
+    //注册一个schema允许uploadId 和 uploadStatus 使用files 
     schema.extend('$text', {
       allowAttributes: [
         'uploadId',
@@ -112,7 +112,7 @@ export default class FileEditing extends Plugin {
       })
       .then(data => {
         model.enqueueChange('transparent', writer => {
-          writer.setAttributes({ uploadStatus: 'complete', linkHref: data.resourceUrl }, fileElement);
+          writer.setAttributes({ uploadStatus: 'complete', linkHref: data.url }, fileElement);
         });
 
         clean();

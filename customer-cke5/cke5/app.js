@@ -8,10 +8,12 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 // import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Italic from '@ckeditor/ckeditor5-basic-styles/src/italic';
 import Bold from '@plugin/plugin-blod/main';
-
+//----------上传文件相关的插件
+import Link from '@ckeditor/ckeditor5-link/src/link';
 import MyFilePlug from '@plugin/plugin-fileupload/main';
-
-//文件上传使用的插件
+import FileUploadProgress from '@plugin/plugin-fileupload/process/fileuploadprogress';
+import MySimpleFileUploadAdapter from '@plugin/plugin-fileupload/myuploadAdapter/mysimplefileuploadadapter';
+//---------------文件上传使用的插件
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 //图片相关
 import Image from '@ckeditor/ckeditor5-image/src/image';
@@ -37,6 +39,7 @@ const pluginsConf=[
   Paragraph,
   Bold,
   Italic,
+  Link,
   SimpleUploadAdapter,
   ImageUpload,
   Image,
@@ -48,6 +51,8 @@ const pluginsConf=[
   ImageResize,
   MediaEmbed,
   MyFilePlug,
+  FileUploadProgress,
+  MySimpleFileUploadAdapter,
 ]
 //工具栏要显示的东西
 const toolbarConf=[
@@ -56,6 +61,7 @@ const toolbarConf=[
   "|",
   Bold.pluginName,
   "Italic",
+  "link",
   'uploadImage',
   'cKFinder',
   'mediaEmbed',
@@ -153,7 +159,7 @@ export class MyEditor {
         //https://stackoverflow.com/questions/53168438/ckeditor-5-register-more-than-one-upload-adapter
         simpleUpload: {
           // The URL that the images are uploaded to.
-          uploadUrl: 'http://localhost:8080/upload/file',
+          uploadUrl: 'http://localhost:8080/upload/image',
   
           // Enable the XMLHttpRequest.withCredentials property.
           // withCredentials: true,
@@ -164,6 +170,21 @@ export class MyEditor {
           // 	Authorization: 'Bearer <JSON Web Token>'
           // }
         },
+  mySimpleFileUpload: {
+    url: 'http://localhost:8080/upload/file',
+	// withCredentials: true,
+	// headers: {
+	// 	'X-CSRF-TOKEN': 'CSRF_TOKEN',
+	// 	Authorization: 'Bearer <JSON Web Token>',
+	// },
+    fileTypes: [
+      '.pdf',
+      '.doc',
+      '.docx',
+      '.xls',
+      '.xlsx'
+    ]
+  },
         image: imageConf,
        initialData: this.content,
         // 'imageConfig' --> IMAGE_CONFIG
