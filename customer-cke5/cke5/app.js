@@ -69,7 +69,8 @@ const toolbarConf=[
 
 
 //文件上传； https://github.com/eMAGTechLabs/ckeditor5-file-upload
-
+//视频上传  https://gitee.com/xccjh/ckeditor5-xccjh/tree/master/src
+//https://vuejscomponent.com/xccjhxccjh-ckeditor5-video-file-upload
 export class MyEditor {
     constructor(props) {
       Object.assign(
