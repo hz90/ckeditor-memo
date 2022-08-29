@@ -26,7 +26,7 @@ import ImageInsert from '@ckeditor/ckeditor5-image/src/imageinsert';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 //视频相关
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
-
+import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar';
 
 //图片相关的配置
 import imageConf from  './config/image_config';
@@ -49,9 +49,10 @@ const pluginsConf=[
   PictureEditing,
   ImageInsert,
   ImageResize,
-  MediaEmbed,
   MyFilePlug,
   FileUploadProgress,
+  MediaEmbed,
+  MediaEmbedToolbar,
   // MySimpleFileUploadAdapter,
 ];
 //工具栏要显示的东西
@@ -71,6 +72,8 @@ const toolbarConf=[
 //文件上传； https://github.com/eMAGTechLabs/ckeditor5-file-upload
 //视频上传  https://gitee.com/xccjh/ckeditor5-xccjh/tree/master/src
 //https://vuejscomponent.com/xccjhxccjh-ckeditor5-video-file-upload
+//http://xccjh.gitee.io/vuebloger/timeLine/
+//https://github.com/xccjh/ckeditor5-xccjh
 export class MyEditor {
     constructor(props) {
       Object.assign(
@@ -132,30 +135,49 @@ export class MyEditor {
         //https://github.com/ckeditor/ckeditor5/issues/7873
         //https://github.com/akilli/ckeditor5-media
         //https://github.com/Technologie-Visao/ckeditor5-video
-        mediaEmbed: {   // 视频配置
-          providers: [
-            {
-    					name: 'myprovider',
-    					url: [
-    						/^lizzy.*\.com.*\/media\/(\w+)/,
-    						/^www\.lizzy.*/,
-    						/(http|https):\/\/([\w.]+\/?)\S*/
-    					],
-    					html: match => {
-    						//获取媒体url
-                const input = match['input'];
-    						return (
-    							'<div style="position: relative; padding-bottom: 50%; height: 0; padding-bottom: 50%;">' +
-    								`<iframe src="${input}" ` +
-    									'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" ' +
-    									'frameborder="0" allowtransparency="true" allow="encrypted-media">' +
-    								'</iframe>' +
-    							'</div>'
-    						);
-    					}
-    				}
+        // mediaEmbed: {   // 视频配置
+        //   providers: [
+        //     {
+    		// 			name: 'myprovider',
+    		// 			url: [
+    		// 				/^lizzy.*\.com.*\/media\/(\w+)/,
+    		// 				/^www\.lizzy.*/,
+    		// 				/(http|https):\/\/([\w.]+\/?)\S*/
+    		// 			],
+    		// 			html: match => {
+    		// 				//获取媒体url
+        //         const input = match['input'];
+    		// 				return (
+    		// 					'<div style="position: relative; padding-bottom: 50%; height: 0; padding-bottom: 50%;">' +
+    		// 						`<iframe src="${input}" ` +
+    		// 							'style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" ' +
+    		// 							'frameborder="0" allowtransparency="true" allow="encrypted-media">' +
+    		// 						'</iframe>' +
+    		// 					'</div>'
+    		// 				);
+    		// 			}
+    		// 		}
+        //   ]
+        // }
+        mediaEmbed: {
+          extraProviders: [
+              {
+                  name: 'zdy',
+                  url: [
+                      /(.*?)/,
+                  ],
+                  html: match => {
+                      const src = match.input;
+                      return (
+                          '<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;pointer-events: auto;">' +
+                          '<video controls style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;" src="' + src + '">' +
+                          '</video>' +
+                          '</div>'
+                      );
+                  }
+              },
           ]
-        }
+      }
       })
         .then((editor) => {
           CKEditorInspector.attach( editor );
