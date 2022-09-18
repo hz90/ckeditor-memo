@@ -68,7 +68,7 @@ const toolbarConf=[
   MyFilePlug.pluginName,
 ];
 
-
+//视频上传插件C:\Users\admin\Downloads\ckeditor-video-master  https://github.com/yunfqueen/ckeditor-video
 //文件上传； https://github.com/eMAGTechLabs/ckeditor5-file-upload
 //视频上传  https://gitee.com/xccjh/ckeditor5-xccjh/tree/master/src
 //https://vuejscomponent.com/xccjhxccjh-ckeditor5-video-file-upload
