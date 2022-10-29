@@ -35,6 +35,17 @@ export function insertVideo( writer, model, attributes = {} ) {
 		writer.setSelection( videoElement, 'on' );
 	}
 }
+export function insertVideo11( writer, model, attributes = {} ) {
+	const videoElement = writer.createElement( 'media', attributes );
+
+	const insertAtSelection = findOptimalInsertionRange( model.document.selection, model );
+
+	model.insertContent( videoElement, insertAtSelection );
+
+	if ( videoElement.parent ) {
+		writer.setSelection( videoElement, 'on' );
+	}
+}
 
 export function isVideoAllowed( model ) {
 	const schema = model.schema;

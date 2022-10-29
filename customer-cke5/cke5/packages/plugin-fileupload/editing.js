@@ -50,6 +50,9 @@ export default class FileEditing extends Plugin {
         if (entry.type == 'insert') {
           const item = entry.position.nodeAfter;
           if (item) {
+            if(item.name=='video'){
+              continue;
+            }
             const isInGraveyard = entry.position.root.rootName == '$graveyard';
             for (const file of getFileLinksFromChangeItem(editor, item)) {
               // Check if the file element still has upload id.
