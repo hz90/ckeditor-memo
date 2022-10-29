@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CKEditor 5 Quick start guide</title>
+
+</head>
+
+<body>
+    <div id="editor">
+        <p>The editor content goes here.</p>
+    </div>
+
+
+    <script src="../../js/bundle.js"></script>
+    <script type="text/javascript">
+        const content = `<div style="disabled:disabled"><p>wise&nbsp;<strong>wrong</strong>&nbsp;<a href="wise">hello</a>&nbsp;<strong>world</strong></p><figure class="ck-image wise-test"></figure></div>`
+        // const content1="";
+        var editor = new MyEditor({
+            id: "editor",
+            content,
+        });
+        // MyEditor1();
+        // var editor = Window.myeditor;
+        // console.log(editor.getData());
+        //var myClassicEditor1 = new myClassicEditor("aaa");
+        // ClassicEditor.create(document.querySelector('#editor'))
+        //     .then(editor => {
+        //         window.editor = editor;
+        //         console.log( 'Editor was initialized', editor );
+        //     })
+        //     .catch(error => {
+        //         console.error('There was a problem initializing the editor.', error);
+        //     });
+        // MyEditor1();
+        // function render() {
+        //     return new MyEditor1({
+        //         id: "editor",
+        //         content,
+        //     })
+        // }
+
+        // function _bind($editor) {
+        //     const submitBtn = document.getElementById("submit");
+        //     submitBtn.onclick = function () {
+        //         const val = $editor.editor && $editor.editor.getData();
+        //         console.log("editorGetValue", val);
+        //     };
+        // };
+
+        // const editor = render();
+        // _bind(editor);
+
+    </script>
+</body>
+
+</html>
