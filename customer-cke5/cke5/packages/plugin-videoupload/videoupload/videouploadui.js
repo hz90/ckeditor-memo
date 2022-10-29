@@ -21,7 +21,7 @@ export default class VideoUploadUI extends Plugin {
             });
 
             view.buttonView.set({
-                label: t('Upload Video111'),
+                label: t('上传视频'),
                 icon: videoUploadIcon,
                 tooltip: true
             });

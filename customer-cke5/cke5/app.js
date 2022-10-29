@@ -32,7 +32,7 @@ import Video from '@plugin/plugin-videoupload/video';
 import VideoResize from '@plugin/plugin-videoupload/videoresize';
 import VideoToolbar from '@plugin/plugin-videoupload/videotoolbar';
 import VideoStyle from '@plugin/plugin-videoupload/videostyle';
-import MyFileVideoPlug from '@plugin/plugin-myvideoupload/main';
+
 
 //图片相关的配置
 import imageConf from  './config/image_config';
@@ -60,8 +60,7 @@ const pluginsConf=[
   MediaEmbed,
   MediaEmbedToolbar,
   // MySimpleFileUploadAdapter,
-  VideoToolbar, Video, VideoUpload, VideoResize, VideoStyle,
-  MyFileVideoPlug
+  VideoToolbar, Video, VideoUpload, VideoResize, VideoStyle
 ];
 //工具栏要显示的东西
 const toolbarConf=[
@@ -74,8 +73,7 @@ const toolbarConf=[
   'uploadImage',
   'mediaEmbed',
   MyFilePlug.pluginName,
-  'videoUpload',
-  MyFileVideoPlug.pluginName
+  'videoUpload'
 ];
 
 class VideoUploadAdapter {
