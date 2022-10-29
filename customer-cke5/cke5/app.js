@@ -27,6 +27,12 @@ import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 //视频相关
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import MediaEmbedToolbar from '@ckeditor/ckeditor5-media-embed/src/mediaembedtoolbar';
+import VideoUpload from '@plugin/plugin-videoupload/videoupload';
+import Video from '@plugin/plugin-videoupload/video';
+import VideoResize from '@plugin/plugin-videoupload/videoresize';
+import VideoToolbar from '@plugin/plugin-videoupload/videotoolbar';
+import VideoStyle from '@plugin/plugin-videoupload/videostyle';
+import MyFileVideoPlug from '@plugin/plugin-myvideoupload/main';
 
 //图片相关的配置
 import imageConf from  './config/image_config';
@@ -54,6 +60,8 @@ const pluginsConf=[
   MediaEmbed,
   MediaEmbedToolbar,
   // MySimpleFileUploadAdapter,
+  VideoToolbar, Video, VideoUpload, VideoResize, VideoStyle,
+  MyFileVideoPlug
 ];
 //工具栏要显示的东西
 const toolbarConf=[
@@ -66,8 +74,38 @@ const toolbarConf=[
   'uploadImage',
   'mediaEmbed',
   MyFilePlug.pluginName,
+  'videoUpload',
+  MyFileVideoPlug.pluginName
 ];
 
+class VideoUploadAdapter {
+  constructor( loader ) {
+      this.loader = loader;
+  }
+
+  upload() {
+      const uploadVideo = async (file) => {
+          this.loader.uploaded = false;
+          return new Promise((resolve) => {
+              setTimeout(() => {
+                  this.loader.uploaded = true;
+                  resolve({ default: 'http://127.0.0.1:8080/20220829-4c32c87cf9b848b0bd730b0eae68d4d1.mp4' });
+              }, 2000);
+          });
+      };
+
+      return this.loader.file.then((file) => uploadVideo(file));
+  }
+
+  abort() {
+      return Promise.reject();
+  }
+}
+function VideoUploadAdapterPlugin( editor ) {
+  editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+      return new VideoUploadAdapter(loader);
+  };
+}
 //视频上传插件C:\Users\admin\Downloads\ckeditor-video-master  https://github.com/yunfqueen/ckeditor-video
 //文件上传； https://github.com/eMAGTechLabs/ckeditor5-file-upload
 //视频上传  https://gitee.com/xccjh/ckeditor5-xccjh/tree/master/src
@@ -89,7 +127,7 @@ export class MyEditor {
     render() {
       ClassicEditor.create(document.querySelector(`#${this.id}`), {
         plugins: pluginsConf,
-        // extraPlugins: [MyCustomUploadAdapterPlugin,MySimpleFileUploadAdapter],
+         extraPlugins: [VideoUploadAdapterPlugin],
         toolbar: toolbarConf,
         //图片，文件，视频上传分为不同的url，需要重写UploadAdapter 
         //https://stackoverflow.com/questions/53168438/ckeditor-5-register-more-than-one-upload-adapter
@@ -119,6 +157,17 @@ export class MyEditor {
             '.docx',
             '.xls',
             '.xlsx'
+          ]
+        },
+        mySimpleFileVideoUpload: {
+          url: 'http://localhost:8080/upload/video',
+        // withCredentials: true,
+        // headers: {
+        // 	'X-CSRF-TOKEN': 'CSRF_TOKEN',
+        // 	Authorization: 'Bearer <JSON Web Token>',
+        // },
+          fileTypes: [
+            '.mp4'
           ]
         },
         image: imageConf,
@@ -177,7 +226,45 @@ export class MyEditor {
                   }
               },
           ]
-      }
+      },
+      video: {
+        upload: {
+            types: ['mp4'],
+            allowMultipleFiles: false,
+        },
+        styles: [
+            'alignLeft', 'alignCenter', 'alignRight'
+        ],
+
+        // Configure the available video resize options.
+        resizeOptions: [
+            {
+                name: 'videoResize:original',
+                label: 'Original',
+                icon: 'original'
+            },
+            {
+                name: 'videoResize:50',
+                label: '50',
+                icon: 'medium'
+            },
+            {
+                name: 'videoResize:75',
+                label: '75',
+                icon: 'large'
+            }
+        ],
+
+        // You need to configure the video toolbar, too, so it shows the new style
+        // buttons as well as the resize buttons.
+        toolbar: [
+            'videoStyle:alignLeft', 'videoStyle:alignCenter', 'videoStyle:alignRight',
+            '|',
+            'videoResize:50',
+            'videoResize:75',
+            'videoResize:original'
+        ]
+    }
       })
         .then((editor) => {
           CKEditorInspector.attach( editor );
